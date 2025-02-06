@@ -4,30 +4,30 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 function MovieDetails() {
-  const { id } = useParams(); // ფილმის ID-ს აღება URL-დან
+  const { id } = useParams(); 
   const [movie, setMovie] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    // წამოიღეთ ფილმის დეტალები OMDb API-დან
+    
     axios
       .get(`http://www.omdbapi.com/?apikey=a96a1636&i=${id}`)
       .then((response) => setMovie(response.data))
       .catch((error) => console.error(error));
 
-    // მიიღეთ ფავორიტები LocalStorage-დან
+    
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
   }, [id]);
 
   const handleAddFavorite = (movie) => {
-    // თუ ფილმი უკვე არ არის ფავორიტებში, დაამატეთ
+    
     const updatedFavorites = [...favorites, movie];
     setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
-  if (!movie) return <div>Loading...</div>; // თუ ფილმი ჯერ არ ჩატვირთულა
+  if (!movie) return <div>Loading...</div>; 
 
   return (
     <Container className="mt-4">
@@ -50,7 +50,7 @@ function MovieDetails() {
           <Button
             variant="warning"
             onClick={() => handleAddFavorite(movie)}
-            disabled={favorites.some((fav) => fav.imdbID === movie.imdbID)} // თუ უკვე ფავორიტია, არ დააჭირო
+            disabled={favorites.some((fav) => fav.imdbID === movie.imdbID)} 
           >
             {favorites.some((fav) => fav.imdbID === movie.imdbID) ? "Already Favorite" : "Add to Favorites"}
           </Button>
