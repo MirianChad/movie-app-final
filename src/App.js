@@ -11,7 +11,7 @@ import "./styles.css";
 function App() {
   return (
     <ThemeProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}> {/* Add basename */}
         <AppContent />
       </Router>
     </ThemeProvider>
@@ -22,7 +22,7 @@ function AppContent() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
-  // Apply the theme to the root HTML element
+  
   React.useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -41,8 +41,6 @@ function AppContent() {
   );
 }
 
-
-
 function PageWrapper({ component }) {
   return (
     <motion.div
@@ -55,4 +53,5 @@ function PageWrapper({ component }) {
     </motion.div>
   );
 }
+
 export default App;
