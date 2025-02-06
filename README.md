@@ -51,3 +51,4 @@ Movie details page with more information about the selected movie.
 
 Search results after searching for a movie.
 
+App is hosted to - https://mirianchad.github.io/movie-app-final/
